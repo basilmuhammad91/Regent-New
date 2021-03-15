@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* CSS Document */
+.nav-link{
+    font-weight: bold;
+    font-family: calibri;
+}
+.navbar-nav{
+    padding-left: 120px !important;
+}

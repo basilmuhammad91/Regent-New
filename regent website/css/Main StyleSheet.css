@@ -1,0 +1,145 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.navbar{
+    background-color: rgba(0, 0, 0, 0.267) !important;
+    transition:  1s;
+}
+
+.navbar.scrolled {
+    background-color: white !important;
+    transition:  1s;
+}
+
+
+
+.nav-link{
+    font-family: calibri !important;
+    color:  white!important;
+    text-align: center;
+    font-weight: bold !important;
+
+}
+
+.nav-link.scrolled{
+    font-family: calibri !important;
+    color:  rgb(39, 105, 247) !important;
+    text-align: center;
+    font-weight: bold !important;
+
+}
+.navheading{
+    font-size: 18px;
+    color: white !important;
+}
+
+.navheading.scrolled{
+    color: black !important;
+}
+
+
+.nav-item{
+    margin-left: 20px !important;
+
+}
+.nav-item:hover{
+    background-color:rgb(39, 105, 247) ;    
+    color: white !important;
+    border-radius: 5px;
+    
+}
+.nav-item:hover .nav-link{
+   
+    color: white !important;
+  
+    
+}
+.dropdown-item{
+    color: rgb(39, 105, 247) !important;
+    text-align: center;
+    font-weight: bold !important;
+}
+.bannermain{
+    height: 100vh !important;
+    background-image: url("../assets/MASJID-E-NABAW.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 20%; 
+    text-align: center;
+   
+}
+
+.banner{
+    height: 100vh !important;
+    background-image: url("../assets/banner1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 20%; 
+    text-align: center;
+   
+}
+
+.wave{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.bannerheading1{
+    font-size: 90px;
+    font-family:Arial, Helvetica, sans-serif;
+    color: white ;
+}
+.bannerheading2{
+    margin: 0px;
+    font-size: 60px;
+    font-family:Arial, Helvetica, sans-serif;
+    color: white ;
+ 
+}
+.mission{
+    background-image: url("../assets/our-mission.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white !important;
+    border-radius: 10px;
+    transform: scale(.9);
+}
+
+
+.vision{
+    background-image: url("../assets/our-vision.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white !important;
+    border-radius: 10px;
+    transform: scale(.9);
+}
+
+
+.value{
+    background-image: url("../assets/our-value.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white !important;
+    border-radius: 10px;
+    transform: scale(.9);
+}
+
+
+.bg2{
+    background-image: url("../assets/f1.jpg") ;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.work-with{
+    transform: scale(.9);
+    border-radius: 8px;
+}

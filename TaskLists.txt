@@ -1,0 +1,21 @@
+Regent Entries - update delete --DONE
+All Cases Entries - crud complete with joins --DONE
+Expenses Crud & its crud
+Generate pdf when check on visa form
+searching & print in both above --50% DONE
+Finalize Authentication 
+Finalize the user crud
+Validation from jquery & php such as user registration validate if user input already existed email
+
+=================
+
+All users can see their own profile. 
+===================
+view details regents
+view details cases
+Separate dropdown
+all forms 
+expenses work
+date to date searching.
+delete regent reports and case reports
+
