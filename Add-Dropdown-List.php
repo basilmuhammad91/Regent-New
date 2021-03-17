@@ -369,6 +369,22 @@ if(isset($_GET['passenger_district_id']))
 	}
 }
 
+
+if(isset($_GET['visa_profession_urdu_id']))
+{
+	$visa_profession_urdu_id = $_GET['visa_profession_urdu_id'];
+	$query = mysqli_query($con, "delete from visa_profession_urdu where visa_profession_urdu_id = '$visa_profession_urdu_id'") or die(mysqli_error($con));
+
+	if($query)
+	{
+		@header('location: Add-Dropdown.php');
+	}
+	else
+	{
+		echo "<script>alert('Error')</script>";
+	}
+}
+
 ?>
 		
 <section class="container-fluid">
@@ -745,6 +761,39 @@ if(isset($_GET['passenger_district_id']))
 									 <td>
 										<center>
 											<a href="Add-Dropdown-List.php?passenger_district_id=<?php echo $row[0] ?>" class="btn bg-danger text-light pl-1 pr-1 pt-0 pb-0">Delete</a>
+										</center>
+									 </td>
+								</tr>
+							<?php
+							$count++;
+						}
+						?>
+					  </tbody>
+				</table>
+			</section>
+
+			<section class="col-xl-3 border mt-3">
+				<h5>Visa Profession Urdu</h5>
+				<table class="table m-auto ">
+					<thead>
+						<tr>
+						  <th scope="col">ID</th>
+						  <th scope="col">Visa Profession Urdu</th>
+						  <th scope="col">Action</th>
+						</tr>
+					  </thead>	
+					  <tbody>
+						<?php
+						$count=1;
+						$query = mysqli_query($con, "select * from visa_profession_urdu");
+						while ($row=mysqli_fetch_array($query)) {
+							?>
+								<tr>
+									 <th scope="row"><?php echo $count?></th>
+									 <td><?php echo $row['name'] ?></td>
+									 <td>
+										<center>
+											<a href="Add-Dropdown-List.php?visa_profession_urdu_id=<?php echo $row[0] ?>" class="btn bg-danger text-light pl-1 pr-1 pt-0 pb-0">Delete</a>
 										</center>
 									 </td>
 								</tr>

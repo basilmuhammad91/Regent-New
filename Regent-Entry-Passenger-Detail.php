@@ -33,11 +33,11 @@ if(isset($_POST['add_passenger_details']))
     $passenger_place_of_birth_id = $_POST['passenger_place_of_birth_id'];
     $passenger_country = $_POST['passenger_country'];
     $passenger_submit_date = $_POST['passenger_submit_date'];
-    $current_date_submission = $_POST['current_date_submission'];
+    $current_date_submission = date("Y/m/d");
     $type = 'regents';
 
-    $query = mysqli_query($con, "INSERT INTO `passenger_details`(`regent_id`, `user_id`, `passenger_name`, `passenger_name_urdu`, `passenger_national_identity_no`, `passenger_district_id`, `passenger_father_name`, `passenger_father_name_urdu`, `passenger_medical_center_id`, `passenger_qualification`, `passenger_eno`, `passenger_dob`, `passenger_place_of_issue_id`, `passenger_address`, `passenger_passport_no`, `passenger_date_of_issue`, `passenger_medical_status_id`, `passenger_date_of_expiry`, `passenger_place_of_birth_id`, `passenger_country`, `passenger_submit_date`, `current_date_submission`, `type`) VALUES (
-         '$regent_id', '$user_id', '$passenger_name', '$passenger_name_urdu', '$passenger_national_identity_no', '$passenger_district_id', '$passenger_father_name', '$passenger_father_name_urdu', '$passenger_medical_center_id', '$passenger_qualification', '$passenger_eno', '$passenger_dob', '$passenger_place_of_issue_id', '$passenger_address', '$passenger_passport_no', '$passenger_date_of_issue', '$passenger_medical_status_id', '$passenger_date_of_expiry', '$passenger_place_of_birth_id', '$passenger_country', '$passenger_submit_date', '$current_date_submission','$type'
+    $query = mysqli_query($con, "INSERT INTO `passenger_details`(`regent_id`, `user_id`, `passenger_name`, `passenger_name_urdu`, `passenger_national_identity_no`, `passenger_district_id`, `passenger_father_name`, `passenger_father_name_urdu`, `passenger_medical_center_id`, `passenger_qualification`, `passenger_eno`, `passenger_dob`, `passenger_place_of_issue_id`, `passenger_address`, `passenger_passport_no`, `passenger_date_of_issue`, `passenger_medical_status_id`, `passenger_date_of_expiry`, `passenger_place_of_birth_id`, `passenger_country`, `passenger_submit_date`, `current_date_submission`, `type`, `status`) VALUES (
+         '$regent_id', '$user_id', '$passenger_name', '$passenger_name_urdu', '$passenger_national_identity_no', '$passenger_district_id', '$passenger_father_name', '$passenger_father_name_urdu', '$passenger_medical_center_id', '$passenger_qualification', '$passenger_eno', '$passenger_dob', '$passenger_place_of_issue_id', '$passenger_address', '$passenger_passport_no', '$passenger_date_of_issue', '$passenger_medical_status_id', '$passenger_date_of_expiry', '$passenger_place_of_birth_id', '$passenger_country', '$passenger_submit_date', '$current_date_submission','$type','Not Deleted'
 )") or die(mysqli_error($con));
 
 if($query>0)
@@ -78,7 +78,7 @@ if(isset($_GET['delete_id']))
         header('location: index.php');
     }
     
-    $query = mysqli_query($con, "delete from passenger_details where passenger_id = '$id'");
+    $query = mysqli_query($con, "update passenger_details set status = 'Deleted' where passenger_id = '$id'");
     if($query)
     {
         echo "<script>window.location.href='Regent-Entry-Passenger-Detail.php';</script>";
@@ -127,6 +127,7 @@ if(isset($_POST['update_passenger_details']))
     $passenger_country = $_POST['passenger_country'];
     $passenger_submit_date = $_POST['passenger_submit_date'];
 
+
     $query = mysqli_query($con, "
         UPDATE `passenger_details` SET `user_id`='$user_id',`passenger_name`='$passenger_name',`passenger_name_urdu`='$passenger_name_urdu',`passenger_national_identity_no`='$passenger_national_identity_no',`passenger_district_id`='$passenger_district_id',`passenger_father_name`='$passenger_father_name',`passenger_father_name_urdu`='$passenger_father_name_urdu',`passenger_medical_center_id`='$passenger_medical_center_id',`passenger_qualification`='$passenger_qualification',`passenger_eno`='$passenger_eno',`passenger_dob`='$passenger_dob',`passenger_place_of_issue_id`='$passenger_place_of_issue_id',`passenger_address`='$passenger_address',`passenger_passport_no`='$passenger_passport_no',`passenger_date_of_issue`='$passenger_date_of_issue',`passenger_medical_status_id`='$passenger_medical_status_id',`passenger_date_of_expiry`='$passenger_date_of_expiry',`passenger_place_of_birth_id`='$passenger_place_of_birth_id',`passenger_country`='$passenger_country',`passenger_submit_date`='$passenger_submit_date' WHERE passenger_id = '$passenger_id';
         ") or die(mysqli_error($con));
@@ -142,6 +143,81 @@ if(isset($_POST['update_passenger_details']))
 
 }
 
+//SEARCH PASSENGER
+if(isset($_POST['search_passenger']))
+{
+    $date_from = date("Y/m/d", strtotime($_POST['date_from']));
+    $date_to = date("Y/m/d", strtotime($_POST['date_to']));
+    $search_passport_no = $_POST['search_passport_no'];
+
+if($date_to !== '' && $date_from !== '' && $search_passport_no !== '')
+{
+    $search_query = mysqli_query($con, "
+SELECT passenger_details.*, passenger_medical_status.name AS passenger_medical_status, passenger_medical_center.name AS passenger_medical_center, passenger_place_of_issue.name AS passenger_place_of_issue, passenger_place_of_birth.name AS passenger_place_of_birth, passenger_district.name AS passenger_district FROM `passenger_details` 
+INNER JOIN passenger_medical_status
+ON
+passenger_medical_status.passenger_medical_status_id = passenger_details.passenger_medical_status_id
+INNER JOIN passenger_medical_center
+ON
+passenger_medical_center.passenger_medical_center_id = passenger_details.passenger_medical_center_id
+INNER JOIN passenger_place_of_issue
+ON
+passenger_place_of_issue.passenger_place_of_issue_id = passenger_details.passenger_place_of_issue_id
+INNER JOIN passenger_place_of_birth
+ON
+passenger_place_of_birth.passenger_place_of_birth_id = passenger_details.passenger_place_of_birth_id
+INNER JOIN passenger_district
+ON
+passenger_district.passenger_district_id = passenger_details.passenger_district_id
+WHERE passenger_details.current_date_submission BETWEEN '$date_from' AND '$date_to' AND passenger_passport_no = '$search_passport_no' AND status = 'Not Deleted'
+    ") or die(mysqli_error($con));
+}
+else if($date_to !== '' && $date_from !== '' && $search_passport_no == '')
+{
+    $search_query = mysqli_query($con, "
+SELECT passenger_details.*, passenger_medical_status.name AS passenger_medical_status, passenger_medical_center.name AS passenger_medical_center, passenger_place_of_issue.name AS passenger_place_of_issue, passenger_place_of_birth.name AS passenger_place_of_birth, passenger_district.name AS passenger_district FROM `passenger_details` 
+INNER JOIN passenger_medical_status
+ON
+passenger_medical_status.passenger_medical_status_id = passenger_details.passenger_medical_status_id
+INNER JOIN passenger_medical_center
+ON
+passenger_medical_center.passenger_medical_center_id = passenger_details.passenger_medical_center_id
+INNER JOIN passenger_place_of_issue
+ON
+passenger_place_of_issue.passenger_place_of_issue_id = passenger_details.passenger_place_of_issue_id
+INNER JOIN passenger_place_of_birth
+ON
+passenger_place_of_birth.passenger_place_of_birth_id = passenger_details.passenger_place_of_birth_id
+INNER JOIN passenger_district
+ON
+passenger_district.passenger_district_id = passenger_details.passenger_district_id
+WHERE passenger_details.current_date_submission BETWEEN '$date_from' AND '$date_to' AND status = 'Not Deleted'
+    ") or die(mysqli_error($con));
+}
+else if($date_to == '' && $date_from == '' && $search_passport_no !== '')
+{
+      $search_query = mysqli_query($con, "
+SELECT passenger_details.*, passenger_medical_status.name AS passenger_medical_status, passenger_medical_center.name AS passenger_medical_center, passenger_place_of_issue.name AS passenger_place_of_issue, passenger_place_of_birth.name AS passenger_place_of_birth, passenger_district.name AS passenger_district FROM `passenger_details` 
+INNER JOIN passenger_medical_status
+ON
+passenger_medical_status.passenger_medical_status_id = passenger_details.passenger_medical_status_id
+INNER JOIN passenger_medical_center
+ON
+passenger_medical_center.passenger_medical_center_id = passenger_details.passenger_medical_center_id
+INNER JOIN passenger_place_of_issue
+ON
+passenger_place_of_issue.passenger_place_of_issue_id = passenger_details.passenger_place_of_issue_id
+INNER JOIN passenger_place_of_birth
+ON
+passenger_place_of_birth.passenger_place_of_birth_id = passenger_details.passenger_place_of_birth_id
+INNER JOIN passenger_district
+ON
+passenger_district.passenger_district_id = passenger_details.passenger_district_id
+WHERE passenger_passport_no = '$search_passport_no' AND status = 'Not Deleted'
+    ") or die(mysqli_error($con));
+}
+
+}
 
 ?>
 		
@@ -392,26 +468,25 @@ if(isset($_POST['update_passenger_details']))
 
 <section class="container-fluid">
     <!-- ============= -->
-	<section class="row" style="align-items: center;">
-		<section class="col-md-2">
-			<span >From</span>
-			<input id="date_from" name="date_from" type="date" class="form-control input-box" />
-		</section>
-		<section class="col-md-2">
-			<span >To</span>
-			<input id="date_to" name="date_to" type="date" class="form-control input-box" />
-		</section>
-		<section class="col-md-2">
-			<span >Passport No.</span>
-			<input id="search_passport_no" name="search_passport_no" type="text" class="form-control input-box" placeholder="Passport No" />
-		</section>
+	<form action="#" method="post">
+     <section class="row" style="align-items: center;">
+        <section class="col-md-2">
+            <span >From</span>
+            <input id="date_from" name="date_from" type="date" class="form-control input-box" />
+        </section>
+        <section class="col-md-2">
+            <span >To</span>
+            <input id="date_to" name="date_to" type="date" class="form-control input-box" />
+        </section>
+        <section class="col-md-2">
+            <span >Passport No.</span>
+            <input id="search_passport_no" name="search_passport_no" type="text" class="form-control input-box" placeholder="Passport No" />
+        </section>
         <section class="col-md-2">
             <input type="submit" name="search_passenger" value="Search" class="btn btn-primary mt-4">
         </section>
-
-      
-
-</section>
+    </section>   
+    </form>
 </section>
    
 
@@ -464,7 +539,77 @@ if(isset($_POST['update_passenger_details']))
                    
         
             <?php
-            $query = mysqli_query($con, "
+           if(isset($_POST['search_passenger']))
+           {
+            $row_count=mysqli_num_rows($search_query);
+            if($row_count>0)
+            {
+                $count=1;
+                while ($std=mysqli_fetch_array($search_query)) {
+                    ?>
+                    <tr>
+                     <th scope="row"><?php echo $count ?></th>
+
+                     <td>
+
+                     <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="font-size: 12px !important; color: white; padding: 0px; margin: 0px; padding-left: 5px !important; padding-right: 5px !important;">
+                                Action
+                            </button>
+                            <div class="dropdown-menu fadeInUp animated faster pl-2" id="table-dropdown" aria-labelledby="dropdownMenuButton">
+                                <?php
+                                if($std['user_id'] == $_SESSION['user_id'] || $role == 'Admin')
+                                {
+                                    ?>
+                                    <a style="font-size: 13px; font-weight: bold;" href="Regent-Entry-Passenger-Detail.php?edit_id=<?php echo $std[0] ?>" class="text-dark p-2">Edit</a><br>
+                                            <a style="font-size: 13px; font-weight: bold;" href="Regent-Entry-Passenger-Detail.php?delete_id=<?php echo $std[0] ?>"  class="text-dark p-2">Delete</a><br>
+                                    <?php
+                                }
+                                ?>
+                                            <a style="font-size: 13px; font-weight: bold;" href="Visa-Form.php?passenger_id=<?php echo $std[0] ?>" class="btn text-light bg-warning p-1 ">Visa Form</a> <br>
+                                            
+                            </div>
+                    </div>
+                        </td>
+                        
+                     <td><?php echo $std['passenger_name'] ?></td>
+                     <td><?php echo $std['passenger_father_name'] ?></td>
+                     <td><?php echo $std['passenger_name_urdu'] ?></td>
+                     <td><?php echo $std['passenger_father_name_urdu'] ?></td>
+                     <td><?php echo $std['passenger_eno'] ?></td>
+                    
+                     <td><?php echo $std['passenger_passport_no'] ?></td>
+                     <td><?php echo $std['passenger_medical_status'] ?></td>
+                     <td><?php echo $std['passenger_dob'] ?></td>
+                     <td><?php echo $std['passenger_date_of_issue'] ?></td>
+                    
+                    <td><?php echo $std['passenger_date_of_expiry'] ?></td>
+                    <td><?php echo $std['passenger_national_identity_no'] ?></td>
+                    <td><?php echo $std['passenger_medical_center'] ?></td>
+                    <td><?php echo $std['passenger_place_of_issue'] ?></td>
+                    
+                    <td><?php echo $std['passenger_place_of_birth'] ?></td>
+                    <td><?php echo $std['passenger_district'] ?></td>
+                    <td><?php echo $std['passenger_qualification'] ?></td>
+                    <td><?php echo $std['passenger_address'] ?></td>
+                    
+                    <td><?php echo $std['passenger_country'] ?></td>
+                    <td><?php echo $std['passenger_submit_date'] ?></td>
+                    <td><?php echo "Marital Status" ?></td>
+                   
+                </tr>
+                    <?php
+                    $count++;
+                }
+            }
+            else
+            {
+                echo "<script>alert('Please input right fields')</script>";
+            }
+           }
+           else
+           {
+         $query = mysqli_query($con, "
 SELECT passenger_details.*, passenger_medical_status.name AS passenger_medical_status, passenger_medical_center.name AS passenger_medical_center, passenger_place_of_issue.name AS passenger_place_of_issue, passenger_place_of_birth.name AS passenger_place_of_birth, passenger_district.name AS passenger_district FROM `passenger_details` 
 INNER JOIN passenger_medical_status
 ON
@@ -481,6 +626,7 @@ passenger_place_of_birth.passenger_place_of_birth_id = passenger_details.passeng
 INNER JOIN passenger_district
 ON
 passenger_district.passenger_district_id = passenger_details.passenger_district_id
+WHERE status = 'Not Deleted'
                 ");
             $count=1;
             while ($row=mysqli_fetch_array($query)) {
@@ -506,7 +652,6 @@ passenger_district.passenger_district_id = passenger_details.passenger_district_
                                 }
                                 ?>
                                             <a style="font-size: 13px; font-weight: bold;" href="Visa-Form.php?passenger_id=<?php echo $row[0] ?>" class="btn text-light bg-warning p-1 ">Visa Form</a> <br>
-                                            <a style="font-size: 13px; font-weight: bold; cursor:pointer" data-toggle="modal" data-target="#exampleModal "class="text-dark p-2" >Done Visa Form</a>
                             </div>
                     </div>
                         </td>
@@ -541,6 +686,7 @@ passenger_district.passenger_district_id = passenger_details.passenger_district_
                 <?php
                 $count++;
             }
+           }
             ?>
 
                 

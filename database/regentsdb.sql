@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2021 at 08:56 PM
--- Server version: 10.4.16-MariaDB
--- PHP Version: 7.4.12
+-- Generation Time: Mar 17, 2021 at 01:45 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -105,8 +105,7 @@ CREATE TABLE `cases` (
 INSERT INTO `cases` (`case_id`, `user_id`, `agency_id`, `visa_file_no`, `visa_no`, `visa_id_no`, `visa_sponsor_name`, `visa_date`, `visa_profession_id`, `visa_price_as_per_agency`, `visa_price_as_per_regent`, `passenger_name`, `passenger_father_name`, `passenger_eno`, `passenger_passport_no`, `passenger_dob`, `passenger_name_urdu`, `passenger_father_name_urdu`, `passenger_date_of_issue`, `passenger_date_of_expiry`, `passenger_submit_date`, `passenger_cnic`, `submitted_to`, `visa_status_id`, `visa_courier_date`, `visa_courier_name`, `visa_courier_no`, `remarks`, `current_date_submission`, `type`) VALUES
 (2, 0, 23, '', '54164', '51531', 'dasfsdf', '10-02-2021', 0, 2000, 5000, 'asdasdf', 'sdfsd', 'asdfsd', 'dsfsd', 'dsdf', 'dsaff', 'sdfas', 'asdf', 'dfasdsf', 'dsafsds', '', 'Submited To', 0, '2021-02-20', '0', 'Courier No', 'sdaf', '', 'cases'),
 (10, 0, 23, '', '', '', '', '', 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', 'sdfsdf', '', '', 'cases'),
-(13, 11, 24, '5000000', '5113', 'sdfsd', 'fsd', '12-02-2021', 5, 3123, 213, 'asdfdf', 'sdfsdf', '213', 'dsf464', '2132', 'dsaff', 'sdfas', 'asdf', '123', 'sdfsdf', '', 'sdf', 4, '2021-02-11', 'dsfsdf', 'sdfsdf', 'sdfdf', '2021/03/11', 'cases'),
-(15, 22, 24, '51351', 'sdfsdf', '1135', 'Umer Khan', '123423423', 6, 13551, 1311, 'Adil', 'Sameer', '100', '500', '153513511', 'عادل', 'سمیر', '113553', '5344', '541534', '5153131531', '5351', 4, '2021-02-22', '51531354', '121634', '135118634', '2021/03/13', 'cases'),
+(15, 11, 24, '0051351', 'sdfsdf', '1135', 'Umer Khan', '123423423', 6, 13551, 1311, 'Adil', 'Sameer', '100', '500', '153513511', 'عادل', 'سمیر', '113553', '5344', '541534', '5153131531', '5351', 4, '2021-02-22', '51531354', '121634', '135118634', '2021/03/15', 'cases'),
 (18, 10, 23, '', '', '', '', '', 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', '', '2021/02/24', 'cases'),
 (20, 11, 23, '', '500', '51351', '51131', '53153156', 3, 521531, 3, 'dfds', 'dsfds', '41541', '531341', '531341', 'دفدسف', 'سدف', '566215321', 'dsfsdf', 'dfsdf', '', 'dsfsda', 4, '2021-03-11', 'sdfsd', 'sdfds', 'dsfsda', '2021/03/11', 'cases'),
 (21, 11, 24, '600', '500', '400', 'dfds', 'dsfsad', 3, 51351, 1351, 'sdafsdaf', 'dsfsd', '1351', 'dsfsdaf', '1531', 'دفسدف', 'دسفسد', '1331', '5153141', '516341', '', 'dfsd', 5, '2021-03-11', 'dfdasf', 'dsf5131', 'dsfdsf', '2021/03/11', 'cases'),
@@ -171,9 +170,22 @@ CREATE TABLE `embassy_lists` (
 --
 
 INSERT INTO `embassy_lists` (`embassy_id`, `table_id`, `type`, `date`, `status`) VALUES
-(51, 13, 'cases', '2021-03-14', 'printed'),
-(52, 15, 'cases', '2021-03-14', 'printed'),
-(53, 15, 'cases', '2021-03-14', 'printed');
+(79, 54, 'regents', '2021-03-15', 'printed'),
+(80, 15, 'cases', '2021-03-15', 'printed'),
+(81, 54, 'regents', '2021-03-15', 'Done'),
+(82, 54, 'regents', '2021-03-15', 'printed'),
+(83, 54, 'regents', '2021-03-15', 'printed'),
+(84, 54, 'regents', '2021-03-15', 'printed'),
+(85, 54, 'regents', '2021-03-15', 'Done'),
+(86, 54, 'regents', '2021-03-15', 'Rejected'),
+(87, 54, 'regents', '2021-03-15', 'Rejected'),
+(88, 54, 'regents', '2021-03-15', 'Rejected'),
+(89, 15, 'cases', '2021-03-15', 'printed'),
+(90, 15, 'cases', '2021-03-15', 'Done'),
+(91, 15, 'cases', '2021-03-15', 'printed'),
+(92, 15, 'cases', '2021-03-15', 'printed'),
+(93, 54, 'regents', '2021-03-15', 'Done'),
+(94, 54, 'regents', '2021-03-15', 'Rejected');
 
 -- --------------------------------------------------------
 
@@ -291,41 +303,45 @@ CREATE TABLE `passenger_details` (
   `passenger_place_of_birth_id` int(11) DEFAULT NULL,
   `passenger_country` varchar(30) DEFAULT NULL,
   `passenger_submit_date` varchar(30) DEFAULT NULL,
-  `type` varchar(20) DEFAULT NULL
+  `current_date_submission` varchar(255) NOT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `passenger_details`
 --
 
-INSERT INTO `passenger_details` (`passenger_id`, `regent_id`, `user_id`, `passenger_name`, `passenger_name_urdu`, `passenger_national_identity_no`, `passenger_district_id`, `passenger_father_name`, `passenger_father_name_urdu`, `passenger_medical_center_id`, `passenger_qualification`, `passenger_eno`, `passenger_dob`, `passenger_place_of_issue_id`, `passenger_address`, `passenger_passport_no`, `passenger_date_of_issue`, `passenger_medical_status_id`, `passenger_date_of_expiry`, `passenger_place_of_birth_id`, `passenger_country`, `passenger_submit_date`, `type`) VALUES
-(29, 28, 11, 'jfsdfkn', '', '', 0, 'jdsfnjksdf', '', 0, '', 'jnjksdfn', '', 0, '', 'kjnsdjkfn', '', 6, '', 0, '', '', 'regents'),
-(30, 32, 11, 'dkfnsdfn', 'دسفسدف', 'dsfdsf', 4, 'jndfjknsd', 'دفسدف', 3, 'dfsdf', 'jndfsjnd', 'dsfsdf', 1, 'dfasdf', 'jnsdjkfn', 'dsfasdf', 6, 'dsfsdf', 5, 'dsfsdf', 'sdfsd', 'regents'),
-(31, 28, 11, 'dsnfjsdnf', '', '', 0, 'jndfjk', '', 0, '', 'nfdnds', '', 0, '', '', '', 0, '', 0, '', '', 'regents'),
-(32, 28, 11, 'dfnsdjkn', '', '', 0, 'ndsfkdjnsf', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', 'regents'),
-(33, 28, 11, 'knflsdnflsdn', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', 'regents'),
-(34, 32, 11, 'dfnsdlfsdn', '', '', 0, 'lnlkfnsfd', '', 0, '', 'ldnsfkl', '', 0, '', '', '', 0, '', 0, '', '', 'regents'),
-(35, 32, 11, 'fsdsdf', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', 'regents'),
-(36, 32, 11, 'jdfjksdfbksdj', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', 'regents'),
-(37, 32, 11, 'fsdfsdafs', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', 'regents'),
-(38, 32, 11, 'fsdfsdafs', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', 'regents'),
-(39, 32, 11, 'dfsdsd', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', 'regents'),
-(40, 32, 11, 'dfsdf', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', 'regents'),
-(41, 33, 11, 'Asad', 'داسف', 'dsfa', 4, 'sdfasd', 'سدف', 3, 'dssdf', 'sdafdas', '51531', 1, 'sdafsf', 'asdfsa', '12/12/2018', 6, '12/12/2019', 5, 'Pakistan', 'dfsdaf', 'regents'),
-(43, 33, 11, 'sdafasdf', 'اسدفسداف', 'asdf', 4, 'sdafasd', 'اسدف', 3, 'asdf', 'sdaf', 'asdf', 1, 'asdf', 'asdfsd', 'asdf', 6, 'asdf', 5, 'asdfasd', 'dasfsdf', 'regents'),
-(44, 32, 11, 'dsfas', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', 'regents'),
-(45, 32, 11, 'dsfasdf', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', 'regents'),
-(46, 34, 11, 'dafasdf', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', 'regents'),
-(47, 34, 11, 'jhjh', 'ھگجھگ', 'gdfgd', 4, 'jfhf', 'تھفگھ', 3, 'ghfg', 'hgf', 'ghdfghd', 1, 'fgdfgd', 'ghfhgf', 'gfd', 6, 'fgsgfs', 6, 'fgsd', 'ghdfg', 'regents'),
-(48, 34, 11, 'jhfgjhfg', 'گھفگھف', 'dsafdsf', 4, 'hgfj', 'گھف', 3, 'sdaf', 'ghd', 'ghhd', 1, 'sadfsd', 'fghd', 'gfdfgd', 6, 'gfd', 5, 'asfdsf', 'asdf', 'regents'),
-(49, 33, 11, 'dfdsa', 'سداف', '', 0, 'dsfsa', 'سدف', 0, '', 'sdfads', '', 0, '', 'sdfaasdf', '', 6, '', 0, '', '', 'regents'),
-(50, 33, 11, 'sdafsdf', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', 'regents'),
-(51, 33, 11, 'asdfsdaf', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', 'regents'),
-(52, 37, 11, 'dsafasdf', 'داسف', '324234', 4, 'sadf', 'اسدف', 3, 'asdf', 'sadf', 'asdf', 1, 'asdf', 'asdf', 'asdf', 6, 'asdf', 5, 'sdafasdf', 'dfsdf', 'regents'),
-(53, 37, 11, 'dsaf', 'فسداف', 'dsfa', 4, 'sadf', 'سادف', 3, 'sdaf', '3', 'sadf', 1, 'sadf', '3', 'sdaf', 6, 'sadf', 5, 'sadf', 'sdf', 'regents'),
-(54, 37, 11, 'dsaf', '', '', 0, 'sdf', '', 0, '', '5', '', 0, '', '', '', 0, '', 0, '', '', 'regents'),
-(55, 37, 11, 'dsf', 'سدفا', 'sadf', 4, 'sdf', 'سادف', 3, 'sadf', 'sdaf', 'sadf', 1, 'asdf', 'sdaf', 'sadf', 6, 'sadf', 5, 'asdf', 'asdf', 'regents'),
-(56, 38, 11, 'fdgfd', 'دفسگ', 'dsfg', 4, 'dfg', 'دفگ', 3, 'dfsg', 'dsfg', 'sdfg', 1, 'sdfg', 'dsfg', 'dsfg', 6, 'dsfg', 5, 'sdfg', 'dfg', 'regents');
+INSERT INTO `passenger_details` (`passenger_id`, `regent_id`, `user_id`, `passenger_name`, `passenger_name_urdu`, `passenger_national_identity_no`, `passenger_district_id`, `passenger_father_name`, `passenger_father_name_urdu`, `passenger_medical_center_id`, `passenger_qualification`, `passenger_eno`, `passenger_dob`, `passenger_place_of_issue_id`, `passenger_address`, `passenger_passport_no`, `passenger_date_of_issue`, `passenger_medical_status_id`, `passenger_date_of_expiry`, `passenger_place_of_birth_id`, `passenger_country`, `passenger_submit_date`, `current_date_submission`, `type`, `status`) VALUES
+(29, 28, 11, 'jfsdfkn', '', '', 0, 'jdsfnjksdf', '', 0, '', 'jnjksdfn', '', 0, '', 'kjnsdjkfn', '', 6, '', 0, '', '', '2021/03/12', 'regents', 'Not Deleted'),
+(30, 32, 11, 'dkfnsdfn', 'دسفسدف', 'dsfdsf', 4, 'jndfjknsd', 'دفسدف', 3, 'dfsdf', 'jndfsjnd', 'dsfsdf', 1, 'dfasdf', 'jnsdjkfn', 'dsfasdf', 6, 'dsfsdf', 5, 'dsfsdf', 'sdfsd', '2021/03/12', 'regents', 'Not Deleted'),
+(31, 28, 11, 'dsnfjsdnf', '', '', 0, 'jndfjk', '', 0, '', 'nfdnds', '', 0, '', '', '', 0, '', 0, '', '', '2021/03/12', 'regents', 'Not Deleted'),
+(32, 28, 11, 'dfnsdjkn', '', '', 0, 'ndsfkdjnsf', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', '2021/03/12', 'regents', 'Not Deleted'),
+(33, 28, 11, 'knflsdnflsdn', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', '2021/03/12', 'regents', 'Not Deleted'),
+(34, 32, 11, 'dfnsdlfsdn', '', '', 0, 'lnlkfnsfd', '', 0, '', 'ldnsfkl', '', 0, '', '', '', 0, '', 0, '', '', '2021/03/13', 'regents', 'Not Deleted'),
+(35, 32, 11, 'fsdsdf', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', '2021/03/13', 'regents', 'Not Deleted'),
+(36, 32, 11, 'jdfjksdfbksdj', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', '2021/03/13', 'regents', 'Not Deleted'),
+(37, 32, 11, 'fsdfsdafs', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', '2021/03/13', 'regents', 'Not Deleted'),
+(38, 32, 11, 'fsdfsdafs', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', '2021/03/13', 'regents', 'Not Deleted'),
+(39, 32, 11, 'dfsdsd', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', '2021/03/13', 'regents', 'Not Deleted'),
+(40, 32, 11, 'dfsdf', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', '', 'regents', 'Not Deleted'),
+(41, 33, 11, 'Asad', 'داسف', 'dsfa', 4, 'sdfasd', 'سدف', 3, 'dssdf', 'sdafdas', '51531', 1, 'sdafsf', 'asdfsa', '12/12/2018', 6, '12/12/2019', 5, 'Pakistan', 'dfsdaf', '', 'regents', 'Not Deleted'),
+(43, 33, 11, 'sdafasdf', 'اسدفسداف', 'asdf', 4, 'sdafasd', 'اسدف', 3, 'asdf', 'sdaf', 'asdf', 1, 'asdf', 'asdfsd', 'asdf', 6, 'asdf', 5, 'asdfasd', 'dasfsdf', '', 'regents', 'Not Deleted'),
+(44, 32, 11, 'dsfas', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', '', 'regents', 'Not Deleted'),
+(45, 32, 11, 'dsfasdf', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', '', 'regents', 'Not Deleted'),
+(46, 34, 11, 'dafasdf', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', '', 'regents', 'Not Deleted'),
+(47, 34, 11, 'jhjh', 'ھگجھگ', 'gdfgd', 4, 'jfhf', 'تھفگھ', 3, 'ghfg', 'hgf', 'ghdfghd', 1, 'fgdfgd', 'ghfhgf', 'gfd', 6, 'fgsgfs', 6, 'fgsd', 'ghdfg', '', 'regents', 'Not Deleted'),
+(48, 34, 11, 'jhfgjhfg', 'گھفگھف', 'dsafdsf', 4, 'hgfj', 'گھف', 3, 'sdaf', 'ghd', 'ghhd', 1, 'sadfsd', 'fghd', 'gfdfgd', 6, 'gfd', 5, 'asfdsf', 'asdf', '', 'regents', 'Not Deleted'),
+(49, 33, 11, 'dfdsa', 'سداف', '', 0, 'dsfsa', 'سدف', 0, '', 'sdfads', '', 0, '', 'sdfaasdf', '', 6, '', 0, '', '', '', 'regents', 'Not Deleted'),
+(50, 33, 11, 'sdafsdf', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', '', 'regents', 'Not Deleted'),
+(51, 33, 11, 'asdfsdaf', '', '', 0, '', '', 0, '', '', '', 0, '', '', '', 0, '', 0, '', '', '', 'regents', 'Not Deleted'),
+(52, 37, 11, 'dsafasdf', 'داسف', '324234', 4, 'sadf', 'اسدف', 3, 'asdf', 'sadf', 'asdf', 1, 'asdf', 'asdf', 'asdf', 6, 'asdf', 5, 'sdafasdf', 'dfsdf', '', 'regents', 'Not Deleted'),
+(53, 37, 11, 'dsaf', 'فسداف', 'dsfa', 4, 'sadf', 'سادف', 3, 'sdaf', '3', 'sadf', 1, 'sadf', '3', 'sdaf', 6, 'sadf', 5, 'sadf', 'sdf', '2021/03/13', 'regents', 'Not Deleted'),
+(54, 37, 11, 'dsaf', '', '', 0, 'sdf', '', 0, '', '5', '', 0, '', '', '', 0, '', 0, '', '', '', 'regents', 'Not Deleted'),
+(55, 37, 11, 'dsf', 'سدفا', 'sadf', 4, 'sdf', 'سادف', 3, 'sadf', 'sdaf', 'sadf', 1, 'asdf', 'sdaf', 'sadf', 6, 'sadf', 5, 'asdf', 'asdf', '', 'regents', ''),
+(56, 38, 11, 'fdgfd', 'دفسگ', 'dsfg', 4, 'dfg', 'دفگ', 3, 'dfsg', 'dsfg', 'sdfg', 1, 'sdfg', 'dsfg', 'dsfg', 6, 'dsfg', 5, 'sdfg', 'dfg', '', 'regents', ''),
+(57, 35, 11, 'asdfasd', 'اسدف', 'asdf', 4, 'asdf', 'اسدف', 3, 'sdaf', '322', 'sadf', 1, 'sdaf', '500', 'asdf', 6, 'asdf', 5, 'asdf', 'asdfsdfa', '', 'regents', ''),
+(58, 35, 11, 'dsfsa', 'سادف', 'jkhfsdjkah', 4, 'asdfas', 'سداجفھ', 3, 'jkasdfh', 'sadf', 'khsdjkfh', 1, 'kjhsdjkahf', 'sdfa', 'kjhsdkjhf', 6, 'jkasdfhjk', 5, 'kjhsdjkfh', 'dsaf', '2021/03/16', 'regents', '');
 
 -- --------------------------------------------------------
 
@@ -433,8 +449,10 @@ CREATE TABLE `regents` (
   `visa_embassy_id` int(11) NOT NULL,
   `visa_quantity_no` float NOT NULL,
   `visa_sponsor_name` varchar(255) NOT NULL,
+  `visa_sponsor_name_urdu` varchar(255) NOT NULL,
   `visa_permission_status_id` int(11) NOT NULL,
   `visa_profession_id` int(11) NOT NULL,
+  `visa_profession_urdu_id` int(11) NOT NULL,
   `visa_contact_pak` varchar(30) NOT NULL,
   `visa_contact_saudia` varchar(30) NOT NULL,
   `visa_reg_date` varchar(30) NOT NULL,
@@ -477,22 +495,29 @@ CREATE TABLE `regents` (
   `nominee_cnic` varchar(30) DEFAULT NULL,
   `nominee_address` text DEFAULT NULL,
   `current_date_submission` varchar(255) DEFAULT NULL,
-  `type` varchar(20) DEFAULT NULL
+  `type` varchar(20) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `regents`
 --
 
-INSERT INTO `regents` (`regent_id`, `user_id`, `visa_date`, `visa_file_no`, `visa_embassy_id`, `visa_quantity_no`, `visa_sponsor_name`, `visa_permission_status_id`, `visa_profession_id`, `visa_contact_pak`, `visa_contact_saudia`, `visa_reg_date`, `visa_reg_no`, `visa_no`, `visa_sponsor_address`, `visa_co_agent_pak_id`, `visa_status_id`, `visa_price`, `visa_sponsor_id`, `visa_date2`, `visa_agent_from_saudia_id`, `visa_remarks`, `passenger_name`, `passenger_name_urdu`, `passenger_national_identity_no`, `passenger_district_id`, `passenger_father_name`, `passenger_father_name_urdu`, `passenger_medical_center_id`, `passenger_qualification`, `passenger_eno`, `passenger_dob`, `passenger_place_of_issue_id`, `passenger_address`, `passenger_passport_no`, `passenger_date_of_issue`, `passenger_medical_status_id`, `passenger_date_of_expiry`, `passenger_place_of_birth_id`, `passenger_country`, `passenger_submit_date`, `agreements_contract`, `agreements_salary`, `agreements_permission_number`, `agreements_permission_date`, `nominee_full_name`, `nominee_age`, `nominee_relation`, `nominee_cnic`, `nominee_address`, `current_date_submission`, `type`) VALUES
-(28, 10, '2021-03-10', '500', 4, 0, 'dsfsd', 3, 5, 'dfsd', 'dsfsdf', '', '', 'dsfsdaf', 'dsf', 2, 5, 0, 'sdfsdf', '13-02-2021', 2, 'owais legend', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'regents'),
-(32, 11, '2021-03-10', '600', 4, 0, 'jndjsfkn', 3, 3, 'dfsd', 'dfsdf', '', '', '600', 'jnsdjfksdn', 2, 4, 0, 'dsfsdf', 'jndsfjn', 2, 'dsfsdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'regents'),
-(33, 11, '2021-03-11', '800', 6, 0, 'sdfdsf', 3, 3, 'dfsd', '5315341541', '', '', '600', 'sdfd', 2, 5, 0, 'sdf', 'dsf', 2, 'dsfdasf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'regents'),
-(34, 11, '2021-03-13', '2', 6, 0, 'sdfasd', 3, 5, 'dsaf', 'sdaf', '', '', '2', 'sdaf', 2, 4, 0, 'dsafsd', 'asdf', 2, 'dasf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'regents'),
-(35, 11, '2021-03-13', 'dsafd', 0, 4, 'asdf', 3, 6, 'sadf', 'asdf', '', '', 'dsaf', 'asdf', 2, 4, 0, 'sdaf', 'asdf', 2, 'asdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'regents'),
-(36, 11, '2021-03-12', 'asdf', 0, 0, 'sdaf', 3, 3, 'asdf', 'asdf', '', '', 'asdf', 'asdf', 2, 0, 0, 'asdf', 'sdaf', 0, 'sadf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'regents'),
-(37, 11, '2021-03-13', '5', 4, 0, 'dasf', 3, 5, 'dsaf', 'sdaf', '', '', '500', 'asdf', 2, 5, 0, 'sdfsdf', 'sdaf', 2, 'sdaf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'regents'),
-(38, 11, '2021-03-13', '8', 4, 1, 'sadf', 3, 5, 'dfsd', '5315341541', '', '', 'dsf', 'asdf', 2, 4, 0, 'sdf', 'sadf', 2, 'sdaf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'regents');
+INSERT INTO `regents` (`regent_id`, `user_id`, `visa_date`, `visa_file_no`, `visa_embassy_id`, `visa_quantity_no`, `visa_sponsor_name`, `visa_sponsor_name_urdu`, `visa_permission_status_id`, `visa_profession_id`, `visa_profession_urdu_id`, `visa_contact_pak`, `visa_contact_saudia`, `visa_reg_date`, `visa_reg_no`, `visa_no`, `visa_sponsor_address`, `visa_co_agent_pak_id`, `visa_status_id`, `visa_price`, `visa_sponsor_id`, `visa_date2`, `visa_agent_from_saudia_id`, `visa_remarks`, `passenger_name`, `passenger_name_urdu`, `passenger_national_identity_no`, `passenger_district_id`, `passenger_father_name`, `passenger_father_name_urdu`, `passenger_medical_center_id`, `passenger_qualification`, `passenger_eno`, `passenger_dob`, `passenger_place_of_issue_id`, `passenger_address`, `passenger_passport_no`, `passenger_date_of_issue`, `passenger_medical_status_id`, `passenger_date_of_expiry`, `passenger_place_of_birth_id`, `passenger_country`, `passenger_submit_date`, `agreements_contract`, `agreements_salary`, `agreements_permission_number`, `agreements_permission_date`, `nominee_full_name`, `nominee_age`, `nominee_relation`, `nominee_cnic`, `nominee_address`, `current_date_submission`, `type`, `status`) VALUES
+(28, 10, '2021-03-10', '500', 4, 0, 'dsfsd', '', 3, 5, 1, 'dfsd', 'dsfsdf', '', '', 'dsfsdaf', 'dsf', 2, 5, 0, 'sdfsdf', '13-02-2021', 2, 'owais legend', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021/03/12', 'regents', 'Not Deleted'),
+(32, 11, '2021-03-10', '600', 4, 3, 'jndjsfkn', 'سدافدفاسدف', 3, 3, 2, 'dfsd', 'dfsdf', '', '', '600', 'jnsdjfksdn', 2, 4, 0, 'dsfsdf', 'jndsfjn', 2, 'dsfsdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021/03/12', 'regents', 'Not Deleted'),
+(33, 11, '2021-03-11', '800', 6, 0, 'sdfdsf', 'فاسدفاسدف', 3, 3, 1, 'dfsd', '5315341541', '', '', '600', 'sdfd', 2, 5, 0, 'sdf', 'dsf', 2, 'dsfdasf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021/03/12', 'regents', 'Not Deleted'),
+(34, 11, '2021-03-13', '2', 6, 0, 'sdfasd', 'ادسفاسف', 3, 5, 1, 'dsaf', 'sdaf', '', '', '2', 'sdaf', 2, 4, 0, 'dsafsd', 'asdf', 2, 'dasf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021/03/12', 'regents', 'Deleted'),
+(35, 11, '2021-03-13', 'dsafd', 0, 2, 'asdf', '', 3, 6, 1, 'sadf', 'asdf', '', '', 'dsaf', 'asdf', 2, 4, 0, 'sdaf', 'asdf', 2, 'asdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021/03/12', 'regents', 'Not Deleted'),
+(36, 11, '2021-03-12', 'asdf', 0, 0, 'sdaf', '', 3, 3, 1, 'asdf', 'asdf', '', '', 'asdf', 'asdf', 2, 0, 0, 'asdf', 'sdaf', 0, 'sadf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021/03/12', 'regents', 'Not Deleted'),
+(37, 11, '2021-03-13', '5', 4, 0, 'dasf', '', 3, 5, 1, 'dsaf', 'sdaf', '', '', '500', 'asdf', 2, 5, 0, 'sdfsdf', 'sdaf', 2, 'sdaf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021/03/12', 'regents', 'Not Deleted'),
+(38, 11, '2021-03-13', '8', 4, 1, 'sadf', '', 3, 5, 1, 'dfsd', '5315341541', '', '', 'dsf', 'asdf', 2, 4, 0, 'sdf', 'sadf', 2, 'sdaf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021/03/12', 'regents', 'Deleted'),
+(39, 11, '2021-03-15', 'dsfsd', 1, 3, 'dsfds', '', 3, 5, 1, 'sadf', '5315341541', '', '', '123123', 'asdf', 2, 4, 0, '12312', '13-02-2021', 2, '1132', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021/03/12', 'regents', 'Not Deleted'),
+(40, 11, '2021-03-15', '5000', 4, 3, 'dsfds', '', 3, 5, 1, 'dsaf', '5315341541', '', '', 'sdfsdf', 'sdf', 2, 5, 0, 'sdfsdf', '13-02-2021', 2, 'dsfdasf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021/03/15', 'regents', 'Not Deleted'),
+(41, 11, '2021-03-17', '454', 4, 2, 'sadf', 'sadfasd f', 3, 2, 1, 'dsaf', '5315341541', '', '', 'sdfasdf', 'asdf ', 2, 5, 0, 'sdaf', 'sadf ', 2, ' sdaf ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021/03/17', 'regents', 'Not Deleted'),
+(42, 11, '2021-03-17', 'dsfas', 4, 2, 'sadf', 'sdaf', 3, 5, 1, 'sdf', 'sdaf', '', '', 'sdaf', 'asdf', 2, 5, 0, 'sdaf', 'asdf', 2, 'sdfasf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021/03/17', 'regents', 'Not Deleted'),
+(43, 11, '2021-03-17', 'asdfa', 4, 10, 'asdfasdf', 'سادفاسدف', 3, 5, 4, 'sadf', 'sdaf', '', '', 'asdfaf', 'asdfsdaf', 2, 5, 0, 'sdaf', 'asdfsdaf', 2, 'dsfasdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021/03/17', 'regents', 'Not Deleted'),
+(44, 11, '2021-03-17', 'dsafa', 4, 3, 'sdfsdaf', 'سدفسدف', 3, 5, 4, 'asdfa', 'asdf', '', '', '500', 'sdfgfdg', 2, 4, 0, '12312', 'dfgdfsg', 2, 'asdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021/03/17', 'regents', 'Not Deleted');
 
 -- --------------------------------------------------------
 
@@ -626,6 +651,26 @@ INSERT INTO `visa_profession` (`visa_profession_id`, `name`) VALUES
 (3, 'Profession'),
 (5, 'dsfssdf'),
 (6, 'sdfsdfsdf');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visa_profession_urdu`
+--
+
+CREATE TABLE `visa_profession_urdu` (
+  `visa_profession_urdu_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `visa_profession_urdu`
+--
+
+INSERT INTO `visa_profession_urdu` (`visa_profession_urdu_id`, `name`) VALUES
+(1, 'fsdasdf'),
+(4, 'dsafdsf'),
+(5, 'sadfasd');
 
 -- --------------------------------------------------------
 
@@ -783,6 +828,12 @@ ALTER TABLE `visa_profession`
   ADD PRIMARY KEY (`visa_profession_id`);
 
 --
+-- Indexes for table `visa_profession_urdu`
+--
+ALTER TABLE `visa_profession_urdu`
+  ADD PRIMARY KEY (`visa_profession_urdu_id`);
+
+--
 -- Indexes for table `visa_status`
 --
 ALTER TABLE `visa_status`
@@ -820,7 +871,7 @@ ALTER TABLE `cases_courier_number`
 -- AUTO_INCREMENT for table `embassy_lists`
 --
 ALTER TABLE `embassy_lists`
-  MODIFY `embassy_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `embassy_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT for table `expenses`
@@ -844,7 +895,7 @@ ALTER TABLE `opening_balances`
 -- AUTO_INCREMENT for table `passenger_details`
 --
 ALTER TABLE `passenger_details`
-  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `passenger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `passenger_district`
@@ -880,7 +931,7 @@ ALTER TABLE `passenger_place_of_issue`
 -- AUTO_INCREMENT for table `regents`
 --
 ALTER TABLE `regents`
-  MODIFY `regent_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `regent_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -917,6 +968,12 @@ ALTER TABLE `visa_permission_status`
 --
 ALTER TABLE `visa_profession`
   MODIFY `visa_profession_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `visa_profession_urdu`
+--
+ALTER TABLE `visa_profession_urdu`
+  MODIFY `visa_profession_urdu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `visa_status`

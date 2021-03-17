@@ -118,6 +118,18 @@ if(isset($_POST['update_agreement']))
 
 }
 
+//SEARCH NOMINEE
+if(isset($_POST['search_nominee']))
+{
+    $date_from = date("Y/m/d", strtotime($_POST['date_from']));
+    $date_to = date("Y/m/d", strtotime($_POST['date_to']));
+
+    $search_query = mysqli_query($con, "
+SELECT * FROM agreement_details WHERE current_date_submission BETWEEN '$date_from' AND '$date_to'
+      ");
+
+}
+
 ?>
 		
       <section class="container-fluid ">
@@ -276,36 +288,23 @@ if(isset($_POST['update_agreement']))
 <section class="container-fluid">
    
 <!-- ============= -->
-	<section class="row" style="align-items: center;">
-		<section class="col-md-2">
-			<span >From</span>
-			<input id="date_from" name="date_from" type="date" class="form-control input-box" />
-		</section>
-		<section class="col-md-2">
-			<span >To</span>
-			<input id="date_to" name="date_to" type="date" class="form-control input-box" />
-		</section>
-		<section class="col-md-2">
-			<span >File No</span>
-			<input id="search_file_no" name="search_file_no" type="text" class="form-control input-box" placeholder="File No." />
-		</section>
-		<section class="col-md-2">
-			<span >Passport No.</span>
-			<input id="search_passport_no" name="search_passport_no" type="text" class="form-control input-box" placeholder="Passport No" />
-		</section>
-		<section class="col-md-2">
-			<span >Visa</span>
-			<input id="search_visa_no" name="search_visa_no" type="text" class="form-control input-box" placeholder="Visa No." />
-		</section>
+	<form action="#" method="post">
+   <section class="row" style="align-items: center;">
+    <section class="col-md-2">
+      <span >From</span>
+      <input id="date_from" name="date_from" type="date" class="form-control input-box" />
+    </section>
+    <section class="col-md-2">
+      <span >To</span>
+      <input id="date_to" name="date_to" type="date" class="form-control input-box" />
+    </section>
 
-        <section class="col-md-2">
-        <span >Sponsor Name</span>
-            <input type="text" id="txtType" class="form-control input-box" placeholder="Sponsor Name" />
-        </section>
-
-      
-
-</section>
+      <section class="col-md-2">
+        <span></span>
+        <input type="submit" name="search_nominee" value="Search" class="btn btn-primary mt-4">
+      </section>
+    </section> 
+  </form>
 
 
 <br>
@@ -346,7 +345,56 @@ if(isset($_POST['update_agreement']))
         
                    
 <?php
-                  $query = mysqli_query($con, "
+
+if(isset($_POST['search_nominee']))
+{
+$count =1;
+                  while ($row=mysqli_fetch_array($search_query)) {
+                    ?>
+                    <tr>
+                     <th scope="row"><?php echo $count ?></th>
+
+                     <td >
+
+                     <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="font-size: 12px !important; color: white; padding: 0px; margin: 0px; padding-left: 5px !important; padding-right: 5px !important;">
+                                Action
+                            </button>
+                            <div class="dropdown-menu fadeInUp animated faster pl-2" id="table-dropdown" aria-labelledby="dropdownMenuButton">
+                              <?php
+                              if($row['user_id'] == $_SESSION['user_id'] || $role == 'Admin')
+                              {
+                                ?>
+                                    <a style="font-size: 13px; font-weight: bold;" href="Regent-Entry-Agreement-Nominee-Detail.php?edit_id=<?php echo $row[0] ?>" class="text-dark p-2">Edit</a><br>
+                                    <a style="font-size: 13px; font-weight: bold;" href="Regent-Entry-Agreement-Nominee-Detail.php?delete_id=<?php echo $row[0] ?>"  class="text-dark p-2">Delete</a><br>
+                                <?php
+                              }
+                              ?>
+                                                
+                                                <a style="font-size: 13px; font-weight: bold;" href="protector.php?agreement_id=<?php echo $row[0] ?>" class="btn text-light bg-warning p-1 ">Protector</a> <br>
+                                                <a style="font-size: 13px; font-weight: bold; cursor:pointer" data-toggle="modal" data-target="#exampleModal "class="text-dark p-2" >Done Protector</a>
+                             </div>
+                        </div>
+                </td>
+                     <td><?php echo "barcode" ?></td>
+                     <td><?php echo $row['agreements_contract'] ?></td>
+                     <td><?php echo $row['agreements_salary'] ?></td>
+                     <td><?php echo $row['agreements_permission_number'] ?></td>
+                     <td><?php echo $row['agreements_permission_date'] ?></td>
+                     <td><?php echo $row['nominee_full_name'] ?></td>
+                     <td><?php echo $row['nominee_age'] ?></td>
+                     <td><?php echo $row['nominee_relation'] ?></td>
+                     <td><?php echo $row['nominee_cnic'] ?></td>
+                     <td><?php echo $row['nominee_address'] ?></td>
+             
+                </tr>
+                    <?php
+                    $count++;
+                  }
+}
+else
+{
+  $query = mysqli_query($con, "
 select * from agreement_details
                     ") or die(mysqli_error($con));
 $count =1;
@@ -392,9 +440,11 @@ $count =1;
                     <?php
                     $count++;
                   }
-                  ?>
-                  </tbody>
-            </table>
+}
+      
+?>
+      </tbody>
+</table>
         
 
 

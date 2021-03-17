@@ -188,6 +188,22 @@ if(isset($_POST['add_district']))
 	}
 }
 
+if(isset($_POST['add_visa_profession_urdu']))
+{
+	$name = $_POST['name'];
+
+	$query = mysqli_query($con, "insert into visa_profession_urdu (name) values ('$name')") or die(mysqli_error($con));
+
+	if($query>0)
+	{
+		@header('location: Add-Dropdown.php');
+	}
+	else
+	{
+		echo "<script>alert('Error')</script>";
+	}
+}
+
 // ==============DELETE===============
 if(isset($_GET['visa_embassy_id']))
 {
@@ -369,6 +385,8 @@ if(isset($_GET['passenger_district_id']))
 	}
 }
 
+
+
 ?>
 		
 <section class="container-fluid">
@@ -460,6 +478,19 @@ if(isset($_GET['passenger_district_id']))
 
 						<section class="col-3">
 							<input name="add_visa_status" type="submit" class="btn-primary btn  " style="width: 100%; margin-top: 28px;" value="Add">
+						</section>
+					</section>
+				</form>
+
+				<form action="#" method="post">
+					<section class="row" style="align-items: center;">
+						<section class="col-md-9">
+							<span>Visa Profession Urdu</span>
+							<input name="name" type="text" class="form-control input-box" placeholder="" />
+						</section>
+
+						<section class="col-3">
+							<input name="add_visa_profession_urdu" type="submit" class="btn-primary btn" style="width: 100%; margin-top: 28px;" value="Add">
 						</section>
 					</section>
 				</form>

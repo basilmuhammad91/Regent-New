@@ -43,6 +43,26 @@ if(isset($_GET['delete_id']))
     }
 }
 
+
+// SEARCH WORK
+if(isset($_POST['search_expenses']))
+{
+    
+    $date_from = $_POST['date_from'];
+    $date_to = $_POST['date_to'];
+
+    $search_query = mysqli_query($con, '
+SELECT * FROM expenses
+INNER JOIN opening_balances
+ON 
+expenses.opening_balance_id = opening_balances.id 
+WHERE expenses.expenses_date BETWEEN "$date_from" AND "$date_to"
+        ') or die(mysqli_error($con));
+
+// $std=mysqli_fetch_array($search_query);
+// print_r($std);
+
+}
 ?>
 
 <!-- GET LAST ID FROM OPENING BALANCES TABLE -->
@@ -180,34 +200,23 @@ else
     <section class="container-fluid">
     <h5>Embassy</h5>
     <br>
-    <section class="row" style="align-items: center;">
+   <form action="#" method="post">
+        <section class="row" style="align-items: center;">
         <section class="col-md-2">
             <span >From</span>
-            <input type="date" class="form-control input-box" placeholder="Name" />
+            <input name="date_from" type="date" class="form-control input-box" placeholder="Name" />
         </section>
         <section class="col-md-2">
             <span >To</span>
-            <input type="date" class="form-control input-box" placeholder="Name" />
+            <input name="date_to" type="date" class="form-control input-box" placeholder="Name" />
         </section>
-        <section class="col-md-2">
-            <span >File No</span>
-            <input type="text" class="form-control input-box" placeholder="File No." />
-        </section>
-        <section class="col-md-2">
-            <span >Passport No.</span>
-            <input type="text" class="form-control input-box" placeholder="Passport No" />
-        </section>
-        <section class="col-md-2">
-            <span >Sponsor Name</span>
-            <input type="text" class="form-control input-box" placeholder="Sponsor Name" />
-        </section>
-
         <section class="col-md-2">
             
-            <input type="button" class="btn-primary btn " style="position: relative; top: 15px; height: 35px; font-size: 14px;" value="Search" />
+            <input type="submit" name="search_expenses" class="btn-primary btn " style="position: relative; top: 15px; height: 35px; font-size: 14px;" value="Search" />
     
         </section>
     </section>
+   </form>
 </section>
 
     <br>
@@ -230,12 +239,35 @@ else
                   </thead>
                   <tbody>
                     <?php
-                    $count=1;
+                    if(isset($_POST['search_expenses']))
+                    {
+$count=1;
+
+                    while ($row=mysqli_fetch_array($search_query)) {
+                        ?>
+                        <tr>
+                            <th scope="row"><?php echo $count ?></th>
+                            <td><?php echo $row['expenses_date'] ?></td>
+                            <td><?php echo $row['amount'] ?></td>
+                            <td><?php echo $row['description'] ?></td>
+                            <td><?php echo $row['opening_balance_amount'] ?></td>
+                            <td>
+                                <a href="Expanse.php?delete_id=<?php echo $row[0] ?>" class="bg-danger btn" style="font-size: 12px !important; color: white; padding: 3px; margin: 1px;  padding-left: 20px !important; padding-right: 20px !important;">Delete</a>
+                             </td>
+                        </tr>
+                        <?php
+                        $count++;
+                    }
+                    }
+                    else
+                    {
+                        $count=1;
                     $query = mysqli_query($con, "
 SELECT * FROM expenses
 INNER JOIN opening_balances
 ON 
 expenses.opening_balance_id = opening_balances.id 
+ORDER BY  expenses.id DESC
                         ");
                     while ($row=mysqli_fetch_array($query)) {
                         ?>
@@ -251,6 +283,7 @@ expenses.opening_balance_id = opening_balances.id
                         </tr>
                         <?php
                         $count++;
+                    }
                     }
                     ?>
                    

@@ -19,8 +19,10 @@ if(isset($_POST['add_visa']))
     $visa_embassy_id = $_POST['visa_embassy_id'];
     $visa_quantity_no = $_POST['visa_quantity_no'];
     $visa_sponsor_name = $_POST['visa_sponsor_name'];
+    $visa_sponsor_name_urdu = $_POST['visa_sponsor_name_urdu'];
     $visa_permission_status_id = $_POST['visa_permission_status_id'];
     $visa_profession_id = $_POST['visa_profession_id'];
+    $visa_profession_urdu_id = $_POST['visa_profession_urdu_id'];
     $visa_contact_pak = $_POST['visa_contact_pak'];
     $visa_contact_saudia = $_POST['visa_contact_saudia'];
     $visa_reg_date = $_POST['visa_reg_date'];
@@ -37,8 +39,8 @@ if(isset($_POST['add_visa']))
     $current_date_submission = date("Y/m/d");
     $type = 'regents';
 
-     $query = mysqli_query($con, "INSERT INTO `regents`(`user_id`, `visa_date`, `visa_file_no`, `visa_embassy_id`, `visa_quantity_no`, `visa_sponsor_name`, `visa_permission_status_id`, `visa_profession_id`, `visa_contact_pak`, `visa_contact_saudia`, `visa_reg_date`, `visa_reg_no`, `visa_no`, `visa_sponsor_address`, `visa_co_agent_pak_id`, `visa_status_id`, `visa_price`, `visa_sponsor_id`, `visa_date2`, `visa_agent_from_saudia_id`, `visa_remarks`, `current_date_submission`, `type`) VALUES (
-         '$user_id', '$visa_date', '$visa_file_no', '$visa_embassy_id', '$visa_quantity_no', '$visa_sponsor_name', '$visa_permission_status_id', '$visa_profession_id', '$visa_contact_pak', '$visa_contact_saudia', '$visa_reg_date', '$visa_reg_no', '$visa_no', '$visa_sponsor_address', '$visa_co_agent_pak_id', '$visa_status_id', '$visa_price', '$visa_sponsor_id', '$visa_date2', '$visa_agent_from_saudia_id', '$visa_remarks','$current_date_submission', '$type'
+     $query = mysqli_query($con, "INSERT INTO `regents`(`user_id`, `visa_date`, `visa_file_no`, `visa_embassy_id`, `visa_quantity_no`, `visa_sponsor_name`, `visa_sponsor_name_urdu`, `visa_permission_status_id`, `visa_profession_id`, `visa_profession_urdu_id`, `visa_contact_pak`, `visa_contact_saudia`, `visa_reg_date`, `visa_reg_no`, `visa_no`, `visa_sponsor_address`, `visa_co_agent_pak_id`, `visa_status_id`, `visa_price`, `visa_sponsor_id`, `visa_date2`, `visa_agent_from_saudia_id`, `visa_remarks`, `current_date_submission`, `type`, `status`) VALUES (
+         '$user_id', '$visa_date', '$visa_file_no', '$visa_embassy_id', '$visa_quantity_no', '$visa_sponsor_name', '$visa_sponsor_name_urdu', '$visa_permission_status_id', '$visa_profession_id', '$visa_profession_urdu_id', '$visa_contact_pak', '$visa_contact_saudia', '$visa_reg_date', '$visa_reg_no', '$visa_no', '$visa_sponsor_address', '$visa_co_agent_pak_id', '$visa_status_id', '$visa_price', '$visa_sponsor_id', '$visa_date2', '$visa_agent_from_saudia_id', '$visa_remarks','$current_date_submission', '$type', 'Not Deleted'
       )");
 
         if($query>0)
@@ -77,8 +79,10 @@ if(isset($_POST['update_visa']))
     $visa_file_no = $_POST['visa_file_no'];
     $visa_embassy_id = $_POST['visa_embassy_id'];
     $visa_sponsor_name = $_POST['visa_sponsor_name'];
+    $visa_sponsor_name_urdu = $_POST['visa_sponsor_name_urdu'];
     $visa_permission_status_id = $_POST['visa_permission_status_id'];
     $visa_profession_id = $_POST['visa_profession_id'];
+    $visa_profession_urdu_id = $_POST['visa_profession_urdu_id'];
     $visa_contact_pak = $_POST['visa_contact_pak'];
     $visa_contact_saudia = $_POST['visa_contact_saudia'];
     $visa_reg_date = $_POST['visa_reg_date'];
@@ -95,7 +99,7 @@ if(isset($_POST['update_visa']))
     $visa_quantity_no = $_POST['visa_quantity_no'];
 
      $query = mysqli_query($con, "
-        UPDATE `regents` SET `user_id`='$user_id',`visa_date`='$visa_date',`visa_file_no`='$visa_file_no',`visa_embassy_id`='$visa_embassy_id',`visa_sponsor_name`='$visa_sponsor_name',`visa_permission_status_id`='$visa_permission_status_id',`visa_profession_id`='$visa_profession_id',`visa_contact_pak`='$visa_contact_pak',`visa_contact_saudia`='$visa_contact_saudia',`visa_reg_date`='$visa_reg_date',`visa_reg_no`='$visa_reg_no',`visa_no`='$visa_no',`visa_sponsor_address`='$visa_sponsor_address',`visa_co_agent_pak_id`='$visa_co_agent_pak_id',`visa_status_id`='$visa_status_id',`visa_price`='$visa_price',`visa_sponsor_id`='$visa_sponsor_id',`visa_date2`='$visa_date2',`visa_agent_from_saudia_id`='$visa_agent_from_saudia_id',`visa_remarks`='$visa_remarks', `visa_quantity_no` = '$visa_quantity_no' WHERE regent_id = '$regent_id';
+        UPDATE `regents` SET `user_id`='$user_id',`visa_date`='$visa_date',`visa_file_no`='$visa_file_no',`visa_embassy_id`='$visa_embassy_id',`visa_sponsor_name`='$visa_sponsor_name',`visa_permission_status_id`='$visa_permission_status_id',`visa_profession_id`='$visa_profession_id', `visa_profession_urdu_id`='$visa_profession_urdu_id', `visa_sponsor_name_urdu` = '$visa_sponsor_name_urdu', `visa_contact_pak`='$visa_contact_pak',`visa_contact_saudia`='$visa_contact_saudia',`visa_reg_date`='$visa_reg_date',`visa_reg_no`='$visa_reg_no',`visa_no`='$visa_no',`visa_sponsor_address`='$visa_sponsor_address',`visa_co_agent_pak_id`='$visa_co_agent_pak_id',`visa_status_id`='$visa_status_id',`visa_price`='$visa_price',`visa_sponsor_id`='$visa_sponsor_id',`visa_date2`='$visa_date2',`visa_agent_from_saudia_id`='$visa_agent_from_saudia_id',`visa_remarks`='$visa_remarks', `visa_quantity_no` = '$visa_quantity_no' WHERE regent_id = '$regent_id';
         ") or die(mysqli_error($con));
 
      if($query)
@@ -114,7 +118,6 @@ if(isset($_GET['delete_id']))
 {
   $id = $_GET['delete_id'];
 
-  
   //AUTHENTICATION
   $check_query = mysqli_query($con, "select * from regents where regent_id = '$id'");
   $std = mysqli_fetch_array($check_query);
@@ -124,7 +127,7 @@ if(isset($_GET['delete_id']))
         header('location: index.php');
     }
     
-  $query = mysqli_query($con, "delete from regents where regent_id = '$id'");
+  $query = mysqli_query($con, "update regents set status = 'Deleted' where regent_id = '$id'");
 
   if($query)
   {
@@ -139,9 +142,12 @@ if(isset($_POST['search_regent']))
     $date_from = date("Y/m/d", strtotime($_POST['date_from']));
     $date_to = date("Y/m/d", strtotime($_POST['date_to']));
     $search_file_no = $_POST['search_file_no'];
-
-    $search_query = mysqli_query($con, "
-SELECT regents.*, visa_embassy.name AS visa_embassy, visa_permission_status.name AS visa_permission_status, visa_profession.name AS visa_profession, visa_co_agent_pak.name AS visa_co_agent_pak, visa_status.name AS visa_status, visa_agent_from_saudia.name AS visa_agent_from_saudia FROM regents
+echo $date_from." ".$date_to." ".$search_file_no;
+    if($date_to !== '' && $date_from !== '' && $search_file_no !== '')
+    {
+        $search_query = mysqli_query($con, "
+SELECT regents.*, visa_embassy.name AS visa_embassy, visa_permission_status.name AS visa_permission_status, visa_profession.name AS visa_profession, visa_co_agent_pak.name AS visa_co_agent_pak, visa_status.name AS visa_status, visa_agent_from_saudia.name AS visa_agent_from_saudia, visa_profession_urdu.name AS visa_profession_urdu
+FROM regents
 INNER JOIN visa_embassy
 ON
 regents.visa_embassy_id = visa_embassy.visa_embassy_id
@@ -160,8 +166,72 @@ regents.visa_status_id = visa_status.visa_status_id
 INNER JOIN visa_agent_from_saudia
 ON
 visa_agent_from_saudia.visa_agent_from_saudia_id = regents.visa_agent_from_saudia_id
-WHERE current_date_submission BETWEEN '$date_from' AND 'date_to' AND visa_file_no = '$search_file_no'
+INNER JOIN visa_profession_urdu
+ON
+visa_profession_urdu.visa_profession_urdu_id = regents.visa_profession_urdu_id
+WHERE current_date_submission BETWEEN '$date_from' AND '$date_to' AND visa_file_no = '$search_file_no' 
 ");
+    }
+    else if($date_to !== '' && $date_from !== '' && $search_file_no == '')
+    {
+                $search_query = mysqli_query($con, "
+SELECT regents.*, visa_embassy.name AS visa_embassy, visa_permission_status.name AS visa_permission_status, visa_profession.name AS visa_profession, visa_co_agent_pak.name AS visa_co_agent_pak, visa_status.name AS visa_status, visa_agent_from_saudia.name AS visa_agent_from_saudia, visa_profession_urdu.name AS visa_profession_urdu
+FROM regents
+INNER JOIN visa_embassy
+ON
+regents.visa_embassy_id = visa_embassy.visa_embassy_id
+INNER JOIN visa_permission_status
+ON
+regents.visa_permission_status_id = visa_permission_status.visa_permission_status_id
+INNER JOIN visa_profession
+ON
+regents.visa_profession_id = visa_profession.visa_profession_id
+INNER JOIN visa_co_agent_pak
+ON
+regents.visa_co_agent_pak_id = visa_co_agent_pak.visa_co_agent_pak_id
+INNER JOIN visa_status
+ON
+regents.visa_status_id = visa_status.visa_status_id
+INNER JOIN visa_agent_from_saudia
+ON
+visa_agent_from_saudia.visa_agent_from_saudia_id = regents.visa_agent_from_saudia_id
+INNER JOIN visa_profession_urdu
+ON
+visa_profession_urdu.visa_profession_urdu_id = regents.visa_profession_urdu_id
+WHERE current_date_submission BETWEEN '$date_from' AND '$date_to' 
+");
+    }
+    else if(!isset($_POST['date_to']) && !isset($_POST['date_from']) && $search_file_no !== '')
+    {
+        echo "<script>alert('hello');</script>";
+                $search_query = mysqli_query($con, "
+SELECT regents.*, visa_embassy.name AS visa_embassy, visa_permission_status.name AS visa_permission_status, visa_profession.name AS visa_profession, visa_co_agent_pak.name AS visa_co_agent_pak, visa_status.name AS visa_status, visa_agent_from_saudia.name AS visa_agent_from_saudia, visa_profession_urdu.name AS visa_profession_urdu
+FROM regents
+INNER JOIN visa_embassy
+ON
+regents.visa_embassy_id = visa_embassy.visa_embassy_id
+INNER JOIN visa_permission_status
+ON
+regents.visa_permission_status_id = visa_permission_status.visa_permission_status_id
+INNER JOIN visa_profession
+ON
+regents.visa_profession_id = visa_profession.visa_profession_id
+INNER JOIN visa_co_agent_pak
+ON
+regents.visa_co_agent_pak_id = visa_co_agent_pak.visa_co_agent_pak_id
+INNER JOIN visa_status
+ON
+regents.visa_status_id = visa_status.visa_status_id
+INNER JOIN visa_agent_from_saudia
+ON
+visa_agent_from_saudia.visa_agent_from_saudia_id = regents.visa_agent_from_saudia_id
+INNER JOIN visa_profession_urdu
+ON
+visa_profession_urdu.visa_profession_urdu_id = regents.visa_profession_urdu_id
+WHERE visa_file_no = '$search_file_no'
+");
+    }
+
 
 
 }   
@@ -233,6 +303,10 @@ WHERE current_date_submission BETWEEN '$date_from' AND 'date_to' AND visa_file_n
                         <input required value="<?php echo @$std['visa_sponsor_name'] ?>" name="visa_sponsor_name" type="text" class="form-control input-box" placeholder="Sponsor Name"/>
                     </section>
 
+                    <section class="col-xl-6">
+                        <input required value="<?php echo @$std['visa_sponsor_name_urdu'] ?>" name="visa_sponsor_name_urdu" id="visa_sponsor_name_urdu" type="text" class="form-control input-box" placeholder="Sponsor Name Urdu"/>
+                    </section>
+
                     <section class="col-xl-3">
                         <input required value="<?php echo @$std['visa_sponsor_address'] ?>" name="visa_sponsor_address" type="text" class="form-control input-box" placeholder="Sponsor Address"/>
                     </section>
@@ -258,12 +332,26 @@ WHERE current_date_submission BETWEEN '$date_from' AND 'date_to' AND visa_file_n
 
                     <section class="col-xl-3">
                         <select name="visa_profession_id" class="form-control input-box" id="exampleFormControlSelect1">
-                            <option>Select Profession</option>
+                            <option>Select Profession ENglish</option>
                             <?php
                             $query = mysqli_query($con, "select * from visa_profession");    
                             while ($row=mysqli_fetch_array($query)) {
                                 ?>
                                 <option <?php if(@$std['visa_profession_id'] == $row[0] ){echo "selected"; }?> value="<?php echo $row[0] ?>"><?php echo $row[1]?></option>
+                                <?php
+                            }
+                            ?>
+                          </select>
+                    </section>
+
+                    <section class="col-xl-3">
+                        <select name="visa_profession_urdu_id" class="form-control input-box" id="exampleFormControlSelect1">
+                            <option>Select Profession Urdu</option>
+                            <?php
+                            $query = mysqli_query($con, "select * from visa_profession_urdu");    
+                            while ($row=mysqli_fetch_array($query)) {
+                                ?>
+                                <option <?php if(@$std['visa_profession_urdu_id'] == $row[0] ){echo "selected"; }?> value="<?php echo $row[0] ?>"><?php echo $row[1]?></option>
                                 <?php
                             }
                             ?>
@@ -389,15 +477,15 @@ WHERE current_date_submission BETWEEN '$date_from' AND 'date_to' AND visa_file_n
         <section class="row" style="align-items: center;">
             <section class="col-md-2">
                 <span >From</span>
-                <input required id="date_from" name="date_from" type="date" class="form-control input-box" />
+                <input id="date_from" name="date_from" type="date" class="form-control input-box" />
             </section>
             <section class="col-md-2">
                 <span >To</span>
-                <input required id="date_to" name="date_to" type="date" class="form-control input-box" />
+                <input id="date_to" name="date_to" type="date" class="form-control input-box" />
             </section>
             <section class="col-md-2">
                 <span >File No</span>
-                <input required id="search_file_no" name="search_file_no" type="text" class="form-control input-box" placeholder="File No." />
+                <input id="search_file_no" name="search_file_no" type="text" class="form-control input-box" placeholder="File No." />
             </section>
             <!-- <section class="col-md-2">
                 <span >Passport No.</span>
@@ -449,10 +537,12 @@ WHERE current_date_submission BETWEEN '$date_from' AND 'date_to' AND visa_file_n
                       <th scope="col">Visa_No</th>
                       <th scope="col">Sponsor_ID</th>
                       <th scope="col">Sponsor_Name</th>
+                      <th scope="col">Sponsor_Name_Urdu</th>
                       <th scope="col">Sponsor_Address</th>
                       <th scope="col">Visa_Date</th>
                       <th scope="col">Permission_status</th>
                       <th scope="col">Profession</th>
+                      <th scope="col">Profession Urdu</th>
                       <th scope="col">Agent_of_Pakistan</th>
                       <th scope="col">Agent_of_Saudia</th>
                       <th scope="col">Contact_No_Pakistan</th>
@@ -461,7 +551,7 @@ WHERE current_date_submission BETWEEN '$date_from' AND 'date_to' AND visa_file_n
                       <th scope="col">Remarks</th>
                       <th scope="col">Registration_Date</th>
                       <th scope="col">Registration_No</th>
-                      <th scope="col">Price</th>
+<th scope="col">Price</th>
                      
                     </tr>
                   </thead>
@@ -543,7 +633,8 @@ else
 else
 {
 $query = mysqli_query($con, "
-SELECT regents.*, visa_embassy.name AS visa_embassy, visa_permission_status.name AS visa_permission_status, visa_profession.name AS visa_profession, visa_co_agent_pak.name AS visa_co_agent_pak, visa_status.name AS visa_status, visa_agent_from_saudia.name AS visa_agent_from_saudia FROM regents
+SELECT regents.*, visa_embassy.name AS visa_embassy, visa_permission_status.name AS visa_permission_status, visa_profession.name AS visa_profession, visa_co_agent_pak.name AS visa_co_agent_pak, visa_status.name AS visa_status, visa_agent_from_saudia.name AS visa_agent_from_saudia, visa_profession_urdu.name AS visa_profession_urdu, regents.status AS status
+FROM regents
 INNER JOIN visa_embassy
 ON
 regents.visa_embassy_id = visa_embassy.visa_embassy_id
@@ -562,6 +653,11 @@ regents.visa_status_id = visa_status.visa_status_id
 INNER JOIN visa_agent_from_saudia
 ON
 visa_agent_from_saudia.visa_agent_from_saudia_id = regents.visa_agent_from_saudia_id
+INNER JOIN visa_profession_urdu
+ON
+visa_profession_urdu.visa_profession_urdu_id = regents.visa_profession_urdu_id
+WHERE regents.status = 'Not Deleted'
+ORDER BY regent_id DESC
   ");
 $count = 1;
                   while ($row=mysqli_fetch_array($query)) {
@@ -603,11 +699,13 @@ $count = 1;
                           
                           <td><?php echo $row['visa_sponsor_id'] ?></td>
                           <td><?php echo $row['visa_sponsor_name'] ?></td>
+                          <td><?php echo $row['visa_sponsor_name_urdu'] ?></td>
                           <td><?php echo $row['visa_sponsor_address'] ?></td>
                           <td><?php echo $row['visa_date2'] ?></td>
                           
                           <td><?php echo $row['visa_permission_status'] ?></td>
                           <td><?php echo $row['visa_profession'] ?></td>
+                          <td><?php echo $row['visa_profession_urdu'] ?></td>
                           <td><?php echo $row['visa_co_agent_pak'] ?></td>
                           <td><?php echo $row['visa_agent_from_saudia'] ?></td>
                           
@@ -713,6 +811,12 @@ $(document).ready(function(){
     });
 });
 </script>
+<script src="js/jquery-fab-button.js"></script>
+<script src="js/urdutextbox.js"></script>
 <script type="text/javascript">
-    
+    window.onload = myOnload;
+
+function myOnload(evt){
+    MakeTextBoxUrduEnabled(visa_sponsor_name_urdu);//enable Urdu in html text box
+}
 </script>
