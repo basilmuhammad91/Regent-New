@@ -13,6 +13,7 @@ if(isset($_POST['submit']))
     $visa_sponsor_name = $_POST['visa_sponsor_name'];
     $visa_date = $_POST['visa_date'];
     $visa_profession_id = $_POST['visa_profession_id'];
+    $visa_profession_urdu_id = $_POST['visa_profession_urdu_id'];
     $visa_price_as_per_agency = $_POST['visa_price_as_per_agency'];
     $visa_price_as_per_regent = $_POST['visa_price_as_per_regent'];
     $passenger_name = $_POST['passenger_name'];
@@ -36,9 +37,9 @@ if(isset($_POST['submit']))
     $type = 'cases';
 
     $query = mysqli_query($con, "
-        INSERT INTO `cases`(`user_id`, `agency_id`, `visa_file_no`, `visa_no`, `visa_id_no`, `visa_sponsor_name`, `visa_date`, `visa_profession_id`, `visa_price_as_per_agency`, `visa_price_as_per_regent`, `passenger_name`, `passenger_father_name`, `passenger_eno`, `passenger_passport_no`, `passenger_dob`, `passenger_name_urdu`, `passenger_father_name_urdu`, `passenger_date_of_issue`, `passenger_date_of_expiry`, `passenger_submit_date`, `passenger_cnic`, `submitted_to`, `visa_status_id`, `visa_courier_date`, `visa_courier_name`, `visa_courier_no`, `remarks`, `current_date_submission`, `type`) VALUES (
+        INSERT INTO `cases`(`user_id`, `agency_id`, `visa_file_no`, `visa_no`, `visa_id_no`, `visa_sponsor_name`, `visa_date`, `visa_profession_id`, `visa_profession_urdu_id`, `visa_price_as_per_agency`, `visa_price_as_per_regent`, `passenger_name`, `passenger_father_name`, `passenger_eno`, `passenger_passport_no`, `passenger_dob`, `passenger_name_urdu`, `passenger_father_name_urdu`, `passenger_date_of_issue`, `passenger_date_of_expiry`, `passenger_submit_date`, `passenger_cnic`, `submitted_to`, `visa_status_id`, `visa_courier_date`, `visa_courier_name`, `visa_courier_no`, `remarks`, `current_date_submission`, `type`) VALUES (
 
-            '$user_id', '$agency_id', '$visa_file_no', '$visa_no', '$visa_id_no', '$visa_sponsor_name', '$visa_date', '$visa_profession_id', '$visa_price_as_per_agency', '$visa_price_as_per_regent', '$passenger_name', '$passenger_father_name', '$passenger_eno', '$passenger_passport_no', '$passenger_dob', '$passenger_name_urdu', '$passenger_father_name_urdu', '$passenger_date_of_issue', '$passenger_date_of_expiry', '$passenger_submit_date', '$passenger_cnic', '$submitted_to', '$visa_status_id', '$visa_courier_date', '$visa_courier_name', '$visa_courier_no', '$remarks', '$current_date_submission', '$type'
+            '$user_id', '$agency_id', '$visa_file_no', '$visa_no', '$visa_id_no', '$visa_sponsor_name', '$visa_date', '$visa_profession_id', '$visa_profession_urdu_id', '$visa_price_as_per_agency', '$visa_price_as_per_regent', '$passenger_name', '$passenger_father_name', '$passenger_eno', '$passenger_passport_no', '$passenger_dob', '$passenger_name_urdu', '$passenger_father_name_urdu', '$passenger_date_of_issue', '$passenger_date_of_expiry', '$passenger_submit_date', '$passenger_cnic', '$submitted_to', '$visa_status_id', '$visa_courier_date', '$visa_courier_name', '$visa_courier_no', '$remarks', '$current_date_submission', '$type'
 
         )
         ") or die(mysqli_error($con));
@@ -81,6 +82,7 @@ if(isset($_POST['update']))
     $visa_sponsor_name = $_POST['visa_sponsor_name'];
     $visa_date = $_POST['visa_date'];
     $visa_profession_id = $_POST['visa_profession_id'];
+    $visa_profession_urdu_id = $_POST['visa_profession_urdu_id'];
     $visa_price_as_per_agency = $_POST['visa_price_as_per_agency'];
     $visa_price_as_per_regent = $_POST['visa_price_as_per_regent'];
     $passenger_name = $_POST['passenger_name'];
@@ -103,7 +105,7 @@ if(isset($_POST['update']))
     $current_date_submission = date("Y/m/d");
 
     $query = mysqli_query($con, "
-        UPDATE `cases` SET `user_id`='$user_id', `agency_id`='$agency_id', `visa_file_no` = '$visa_file_no', `visa_no`='$visa_no',`visa_id_no`='$visa_id_no',`visa_sponsor_name`='$visa_sponsor_name',`visa_date`='$visa_date',`visa_profession_id`='$visa_profession_id',`visa_price_as_per_agency`='$visa_price_as_per_agency',`visa_price_as_per_regent`='$visa_price_as_per_regent',`passenger_name`='$passenger_name',`passenger_father_name`='$passenger_father_name',`passenger_eno`='$passenger_eno',`passenger_passport_no`='$passenger_passport_no',`passenger_dob`='$passenger_dob',`passenger_name_urdu`='$passenger_name_urdu',`passenger_father_name_urdu`='$passenger_father_name_urdu',`passenger_date_of_issue`='$passenger_date_of_issue',`passenger_date_of_expiry`='$passenger_date_of_expiry',`passenger_submit_date`='$passenger_submit_date', `passenger_cnic` = '$passenger_cnic',`submitted_to`='$submitted_to',`visa_status_id`='$visa_status_id',`visa_courier_date`='$visa_courier_date',`visa_courier_name`='$visa_courier_name',`visa_courier_no`='$visa_courier_no',`remarks`='$remarks',`current_date_submission`='$current_date_submission' WHERE case_id = '$case_id';
+        UPDATE `cases` SET `user_id`='$user_id', `agency_id`='$agency_id', `visa_file_no` = '$visa_file_no', `visa_no`='$visa_no',`visa_id_no`='$visa_id_no',`visa_sponsor_name`='$visa_sponsor_name',`visa_date`='$visa_date',`visa_profession_id`='$visa_profession_id', `visa_profession_urdu_id` = '$visa_profession_urdu_id', `visa_price_as_per_agency`='$visa_price_as_per_agency',`visa_price_as_per_regent`='$visa_price_as_per_regent',`passenger_name`='$passenger_name',`passenger_father_name`='$passenger_father_name',`passenger_eno`='$passenger_eno',`passenger_passport_no`='$passenger_passport_no',`passenger_dob`='$passenger_dob',`passenger_name_urdu`='$passenger_name_urdu',`passenger_father_name_urdu`='$passenger_father_name_urdu',`passenger_date_of_issue`='$passenger_date_of_issue',`passenger_date_of_expiry`='$passenger_date_of_expiry',`passenger_submit_date`='$passenger_submit_date', `passenger_cnic` = '$passenger_cnic',`submitted_to`='$submitted_to',`visa_status_id`='$visa_status_id',`visa_courier_date`='$visa_courier_date',`visa_courier_name`='$visa_courier_name',`visa_courier_no`='$visa_courier_no',`remarks`='$remarks',`current_date_submission`='$current_date_submission' WHERE case_id = '$case_id';
         ") or die(mysqli_error($con));
 
     if($query)
@@ -180,7 +182,7 @@ if(isset($_GET['delete_id']))
 
                 <section class="col-xl-3">
                     <select name="visa_profession_id" class="form-control input-box" id="exampleFormControlSelect1">
-                        <option>Select Profession</option>
+                        <option>Select Profession English</option>
                         <?php
                         $query = mysqli_query($con, "select * from visa_profession");
                         while ($row=mysqli_fetch_array($query)) {
@@ -192,6 +194,21 @@ if(isset($_GET['delete_id']))
                         ?>
                       </select>
                 </section>
+
+                <section class="col-xl-3">
+                    <select name="visa_profession_urdu_id" class="form-control input-box" id="exampleFormControlSelect1">
+                        <option>Select Profession Urdu</option>
+                        <?php
+                        $query = mysqli_query($con, "select * from visa_profession_urdu");    
+                        while ($row=mysqli_fetch_array($query)) {
+                            ?>
+                            <option <?php if(@$std['visa_profession_urdu_id'] == $row[0] ){echo "selected"; }?> value="<?php echo $row[0] ?>"><?php echo $row[1]?></option>
+                            <?php
+                        }
+                        ?>
+                      </select>
+                </section>
+
 
                 <section class="col-xl-3">
                     <input value="<?php echo @$std['visa_price_as_per_agency'] ?>" name="visa_price_as_per_agency" required type="number" class="form-control input-box " placeholder="Price As Per Agency"/>

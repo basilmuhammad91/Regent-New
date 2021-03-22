@@ -249,13 +249,13 @@ WHERE passenger_passport_no = '$search_passport_no' AND status = 'Not Deleted'
     <br>
 
     
-<section class="container-fluid">
+<!-- <section class="container-fluid">
     <section class="row">
         <section class="col-md-6"><h5 class=""> Passenger Details</h5></section>
         <section class="col-md-6 text-right"> <input type="button" class="btn-primary btn   " value="Add New Passenger" /></section>
     </section>
 </section>    
-
+ -->
 
     <section class="container-fluid">
         <form action="#" method="post" class="">

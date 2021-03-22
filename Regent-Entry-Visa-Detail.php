@@ -416,22 +416,22 @@ WHERE visa_file_no = '$search_file_no'
                     </section>
 
                     <section class="col-xl-3">
-                        <input disabled="disabled" value="<?php echo @$std['visa_reg_date'] ?>" name="visa_reg_date" type="text" class="form-control input-box"  placeholder="Registration Date"/>
+                        <input disabled="disabled" value="<?php echo @$std['visa_reg_date'] ?>" name="visa_reg_date" type="hidden" class="form-control input-box"  placeholder="Registration Date"/>
                     </section>
 
                     <section class="col-xl-3">
-                        <input disabled="disabled" value="<?php echo @$std['visa_reg_no'] ?>" name="visa_reg_no" type="text" class="form-control input-box" placeholder="Registration No."/>
+                        <input disabled="disabled" value="<?php echo @$std['visa_reg_no'] ?>" name="visa_reg_no" type="hidden" class="form-control input-box" placeholder="Registration No."/>
                     </section>
 
                     <section class="col-xl-3 mt-2">
-                        
-                        <span class="lock ">
+                        <input value="<?php echo @$std['visa_price'] ?>" name="visa_price" type="hidden" class="mt-0 form-control input-box"  placeholder="Price"/>
+                        <!-- <span class="lock ">
                             <div class=" input-box p-0 " style="height: 35px !important">
                                 <input type="checkbox" disabled="true" />
                                 <span></span>
-                                <input value="<?php echo @$std['visa_price'] ?>" name="visa_price" type="text" class="mt-0 form-control input-box"  placeholder="Price"/>
+                                
                             </div>
-                        </span>
+                        </span> -->
                     </section>
         </section>
             </section>

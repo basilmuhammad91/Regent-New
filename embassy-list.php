@@ -189,7 +189,7 @@ update embassy_lists set status = 'printed' where embassy_id = '$std[0]';
 		</thead>
 		  <?php
 		  $query = mysqli_query($con, "
-SELECT embassy_lists.*, passenger_details.passenger_name_urdu AS passenger_name_urdu, passenger_details.passenger_father_name_urdu AS passenger_father_name_urdu, regents.visa_sponsor_name AS visa_sponsor_name, passenger_details.passenger_eno AS passenger_eno
+SELECT embassy_lists.*, passenger_details.passenger_name_urdu AS passenger_name_urdu, passenger_details.passenger_father_name_urdu AS passenger_father_name_urdu, regents.visa_sponsor_name AS visa_sponsor_name, passenger_details.passenger_eno AS passenger_eno, users.name AS user_name, visa_profession_urdu.name AS visa_profession_urdu, regents.visa_date2 AS visa_date
 FROM `embassy_lists` 
 INNER JOIN passenger_details
 ON
@@ -197,29 +197,41 @@ embassy_lists.type = passenger_details.type
 INNER JOIN regents
 ON
 regents.regent_id = passenger_details.regent_id
+INNER JOIN users
+ON
+passenger_details.user_id = users.user_id
+INNER JOIN visa_profession_urdu
+ON
+regents.visa_profession_urdu_id = visa_profession_urdu.visa_profession_urdu_id
 WHERE embassy_lists.table_id = passenger_details.passenger_id and embassy_lists.status = 'pending'
 UNION
-SELECT embassy_lists.*, cases.passenger_name_urdu AS passenger_name_urdu, cases.passenger_father_name_urdu AS passenger_father_name_urdu, cases.visa_sponsor_name AS visa_sponsor_name, cases.passenger_eno AS passenger_eno
+SELECT embassy_lists.*, cases.passenger_name_urdu AS passenger_name_urdu, cases.passenger_father_name_urdu AS passenger_father_name_urdu, cases.visa_sponsor_name AS visa_sponsor_name, cases.passenger_eno AS passenger_eno, users.name AS user_name, visa_profession_urdu.name AS visa_profession_urdu, cases.visa_date AS visa_date
 FROM embassy_lists
 INNER JOIN cases
 ON
 embassy_lists.type = cases.type
+INNER JOIN users
+ON
+cases.agency_id = users.user_id
+INNER JOIN visa_profession_urdu
+ON
+cases.visa_profession_urdu_id = visa_profession_urdu.visa_profession_urdu_id
 WHERE embassy_lists.table_id = cases.case_id and embassy_lists.status = 'pending'
 		  	");
 		  $count=1;
-		  // $count_rows = mysqli_num_rows($query);
-		  // echo $count_rows;
+		  
 	  	while ($row=mysqli_fetch_array($query)) {
 	  		?>
 			  <tr>
 				  <td>xxxxx</td>
 				  <td>xxxxx</td>
-				  <td>xxxxx</td>
+				  <td><?php echo $row['visa_date'] ?></td>
 				  <td><?php echo $row['passenger_eno']?></td>
-				  <td>xxxxx</td>
+				  <td><?php echo $row['visa_profession_urdu'] ?></td>
 				  <td><?php echo $row['visa_sponsor_name'] ?></td>
-				  <td><?php echo $row['passenger_father_name_urdu'] ?></td>
+				  <!-- <td><?php echo $row['passenger_father_name_urdu'] ?></td> -->
 				  <td><?php echo $row['passenger_name_urdu'] ?></td>
+				  <td><?php echo $row['user_name'] ?></td>
 				  <td><?php echo $count?></td>
 			  </tr>
 	  		<?php

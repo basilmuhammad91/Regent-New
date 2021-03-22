@@ -196,10 +196,10 @@ if(isset($_POST['logout']))
           <a class="nav-link text-light showhide1" ><i class="fa fa-paste"></i> Ledger & Reports</a>
           <section class="main1 showhidebox" >
             <a class="nav-link text-light list-link wow fadeInDown animated faster delay-1s" href="Final-case.php" ><b>o</b> Final Case</a>
-            <a class="nav-link text-light list-link wow fadeInDown animated faster delay-1s" href="Agency-ledger.html" ><b>o</b> Agency Ledger</a>
+            <a class="nav-link text-light list-link wow fadeInDown animated faster delay-1s" href="Agency-ledger.php" ><b>o</b> Agency Ledger</a>
             <a class="nav-link text-light list-link wow fadeInDown animated faster delay-1s" href="Regent-ledger.html" ><b>o</b> Regent Ledger</a>
             
-          <a class="nav-link text-light list-link wow fadeInDown animated faster delay-1s" href="Regent-Reporrts.php" ><b>o</b> All Case Report</a> 
+          <a class="nav-link text-light list-link wow fadeInDown animated faster delay-1s" href="All-Case-Reports.php" ><b>o</b> All Case Report</a> 
           </section>
         </li>
         <li class="nav-item" style="cursor:pointer">
